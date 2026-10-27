@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 6: Маніпуляція DOM та обробка подій</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #ddd;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        footer {
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            border-top: 2px solid #ddd;
+        }
+        .section-block {
+            margin-bottom: 30px;
+        }
+        .hover-target {
+            padding: 10px;
+            background-color: #e0e0e0;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .dynamic-item {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            background-color: #fafafa;
+        }
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Маніпуляція DOM та обробка подій</h1>
+    </header>
+
+    <main>
+        <!-- Зміна вмісту елемента -->
+        <section class="section-block">
+            <h2>Зміна вмісту елемента</h2>
+            <p id="textToChange">Це початковий текст, який потрібно змінити.</p>
+            <button id="btnChangeText">Змінити текст</button>
+        </section>
+        <section class="section-block">
+            <h2>Обробка подій</h2>
+            <div id="hoverElement" class="hover-target">Наведіть курсор на мене</div>
+            <p>Наведіть курсор на елемент, щоб побачити зміну стилю.</p>
+        </section>
+        <section class="section-block">
+            <h2>Додавання нового елемента</h2>
+            <button id="btnAddElement">Додати елемент</button>
+            <div id="elementsContainer"></div>
+        </section>
+        <section class="section-block">
+            <h2>Додаткове завдання</h2>
+            <button id="btnVariant">Натисніть 2 рази!</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>Лабораторна робота 6. JavaScript, DOM, події.</p>
+    </footer>
+
+    <script>
+        const textToChange = document.getElementById('textToChange');
+        const btnChangeText = document.getElementById('btnChangeText');
+        
+        btnChangeText.addEventListener('click', function() {
+            textToChange.textContent = "Текст змінено! Це новий вміст.";
+        });
+        const hoverElement = document.getElementById('hoverElement');
+        
+        hoverElement.addEventListener('mouseover', function() {
+            hoverElement.style.backgroundColor = '#ffeb3b';
+            hoverElement.style.color = '#d32f2f';
+            hoverElement.style.fontWeight = 'bold';
+        });
+
+        hoverElement.addEventListener('mouseout', function() {
+            hoverElement.style.backgroundColor = '#e0e0e0';
+            hoverElement.style.color = 'black';
+            hoverElement.style.fontWeight = 'normal';
+        });
+        const btnAddElement = document.getElementById('btnAddElement');
+        const elementsContainer = document.getElementById('elementsContainer');
+        
+        btnAddElement.addEventListener('click', function() {
+            let newElement = document.createElement('div');
+            newElement.classList.add('dynamic-item');
+            newElement.textContent = "Це новий доданий елемент.";
+            
+            // Додавання його в DOM
+            elementsContainer.appendChild(newElement);
+        });
+        const variantNumber = 2; 
+        const studentName = "Боднар Дмитро"; 
+        
+        const btnVariant = document.getElementById('btnVariant');
+        let clickCount = 0;
+
+        btnVariant.addEventListener('click', function() {
+            clickCount++;
+            if (clickCount === variantNumber) {
+                alert(studentName + " варіант номер " + variantNumber + "!");
+                clickCount = 0; // Скидання лічильника після спрацьовування
+            }
+        });
+    </script>
+
+</body>
+</html>
